@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services – AIT Inc Ltd</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', sans-serif; color: #333; }
+a { color: #4C9F70; }
+.site-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #fff; position: sticky; top: 0; }
+.nav-toggle { display: none; }
+
+/* Hero */
+.services-hero { padding: 4rem 2rem; background: #eef7f3; text-align: center; }
+
+/* Services list */
+.services-list { display: flex; justify-content: center; gap: 2rem; padding: 4rem 2rem; }
+.service-item { background: #fff; padding: 2rem; border-radius: 8px; width: 250px; text-align: center; opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+
+/* Animations */
+[data-anim="slide-up"].visible { opacity: 1; transform: translateY(0); }
+
+/* Footer */
+.site-footer { text-align: center; padding: 2rem; background: #fff; }
+
+/* Responsive */
+@media(max-width:768px) {
+  .services-list { flex-direction: column; align-items: center; }
+  .nav a { display: none; }
+  .nav-toggle { display: block; }
+  .nav.open a { display: block; margin: .5rem 0; }
+}
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">AIT Inc Ltd</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="contact.html">Contact</a>
+      <button class="nav-toggle">☰</button>
+    </nav>
+  </header>
+
+  <section class="services-hero">
+    <h1>What We Offer</h1>
+  </section>
+
+  <section class="services-list">
+    <div class="service-item" data-anim="slide-up">
+      <h3>AI Consulting</h3>
+      <p>In-depth analysis & roadmaps for AI adoption.</p>
+    </div>
+    <div class="service-item" data-anim="slide-up" data-delay="200">
+      <h3>Model Development</h3>
+      <p>From proof-of-concepts to production systems.</p>
+    </div>
+    <div class="service-item" data-anim="slide-up" data-delay="400">
+      <h3>Data Engineering</h3>
+      <p>Robust pipelines to feed your ML models.</p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>© 2025 AIT Inc Ltd. All rights reserved.</p>
+  </footer>
+
+  <script>
+// Nav toggle
+const nav3 = document.querySelector('.nav');
+document.querySelector('.nav-toggle').addEventListener('click', () => {
+  nav3.classList.toggle('open');
+});
+
+// Slide-up reveal
+const items = document.querySelectorAll('[data-anim="slide-up"]');
+const obs3 = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const d = el.getAttribute('data-delay') || 0;
+      setTimeout(() => el.classList.add('visible'), d);
+      obs3.unobserve(el);
+    }
+  });
+}, { threshold: 0.2 });
+items.forEach(i => obs3.observe(i));
+</script>
+</body>
+</html>
